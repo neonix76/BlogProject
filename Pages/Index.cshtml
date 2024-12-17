@@ -6,6 +6,8 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@using Microsoft.AspNetCore.Authorization;
+
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -17,30 +19,38 @@
 </head>
 @if (SignInManager.IsSignedIn(User))
 {
-<body>
-    <section class="about-company">
-        <h1 class="visually-hidden">Создай свой БЛОГ сейчас!</h1>
-        <div class="container">
-            <div class="about-company__content">
-                <div class="about-company__img">
-                    <picture>
-                        @* <source srcset="./assets/images/kworkers2.avif" type="image/avif">
+    <body>
+        <section class="about-company">
+            <h1 class="visually-hidden">Создай свой БЛОГ сейчас!</h1>
+            <div class="container">
+                <div class="about-company__content">
+                    <div class="about-company__img">
+                        <picture>
+                            @* <source srcset="./assets/images/kworkers2.avif" type="image/avif">
                         <source srcset="./assets/images/kworkers2.webp" type="image/webp"> *@
-                        <img src="./img/scale_1200.png" alt="create offer pls">
-                    </picture>
+                            <img src="./img/scale_1200.png" alt="create offer pls">
+                        </picture>
+                    </div>
+                    <p class="about-company__title h1">Создай свой БЛОГ сейчас!</p>
+                    <p class="about-company__info text-info">Сервис предоставляет место где люди могут создать блоги по своим интересам и найти своих единомышленников!</p>
+
+                    <button class="about-company__create-deal create-deal reset-btn" data-a11y-dialog-show="dialog-window">
+                        <a class="reset-btn" asp-area="" asp-page="/Blogs/Create">Создать Блог</a>
+                    </button>
+                    <button class="about-company__create-deal create-deal reset-btn" data-a11y-dialog-show="dialog-window">
+                        <a class="reset-btn" asp-area="" asp-page="/Posts/Index">Лента постов</a>
+                    </button>
                 </div>
-                <p class="about-company__title h1">Создай свой БЛОГ сейчас!</p>
-                <p class="about-company__info text-info">Сервис предоставляет место где люди могут создать блоги по своим интересам и найти своих единомышленников!</p>
-                
-                <button class="about-company__create-deal create-deal reset-btn" data-a11y-dialog-show="dialog-window">
-                    <a class="reset-btn" asp-area="" asp-page="/Blogs/Create">Создать Блог</a>
-                </button>
-                <button class="about-company__create-deal create-deal reset-btn" data-a11y-dialog-show="dialog-window">
-                    <a class="reset-btn" asp-area="" asp-page="/Posts/Index">Лента постов</a>
-                </button>
             </div>
-        </div>
+        </section>
+
+        <section>
+            <form id="addRoleForm" method="post">
+                <input type="text" name="roleName" placeholder="Введите имя роли" value="STALIN" required />
+                <button type="submit">Добавить роль</button>
+            </form>
     </section>
+
     <section class="containerr">
         @foreach (var item in Model.BlogE)
         {
@@ -57,12 +67,6 @@
                 </tr>
             </div>
         }
-        @* <a class="blockk" asp-area="" asp-page="/posti">opisanie</a> *@
-        @* <a class="blockk" asp-area="" asp-page="/vxod">vxod</a> *@
-        @* <a class="blockk" asp-area="" asp-page="/regesrt">regesrt</a> *@
-        @* <a href="page4.html" class="blockk">Блок 4</a> *@
-        @* <a href="page5.html" class="blockk">Блок 5</a> *@
-        @* <a href="page6.html" class="blockk">Блок 6</a> *@
     </section>
 
 
@@ -360,3 +364,23 @@ else{
     <img src="/img/photo_2024-12-18_00-29-43.jpg">
 }
 </html>
+
+                    <script>
+    $(document).ready(function () {
+        $('#addRoleForm').on('submit', function (e) {
+            e.preventDefault(); // Предотвращаем стандартное поведение формы
+
+            $.ajax({
+                url: '@Url.Action("AddRoleToUser ", "Account")', // Убедитесь, что имя контроллера правильное
+                type: 'POST',
+                data: $(this).serialize(), // Сериализуем данные формы
+                success: function (response) {
+                    $('#responseMessage').text(response); // Отображаем сообщение об успехе
+                },
+                error: function (xhr) {
+                    $('#responseMessage').text(xhr.responseText); // Отображаем сообщение об ошибке
+                }
+            });
+        });
+    });
+</script>
