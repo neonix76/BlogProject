@@ -1,11 +1,349 @@
 ﻿@page
-@model IndexModel
+@model BlogProject.Pages.Blogs.IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <a class="nav-link text-dark" asp-area="" asp-page="/Posts/Index">ПОСТЫ</a>
-    <a class="nav-link text-dark" asp-area="" asp-page="/Blogs/Index">БЛОГИ</a>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создай свой БЛОГ сейчас!</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Подключите ваш CSS файл, если он есть -->
+</head>
+<body>
     
-</div>
+    <section class="about-company">
+        <h1 class="visually-hidden">Создай свой БЛОГ сейчас!</h1>
+        <div class="container">
+            <div class="about-company__content">
+                <div class="about-company__img">
+                    <picture>
+                        @* <source srcset="./assets/images/kworkers2.avif" type="image/avif">
+                        <source srcset="./assets/images/kworkers2.webp" type="image/webp"> *@
+                        <img src="./img/scale_1200.png" alt="create offer pls">
+                    </picture>
+                </div>
+                <p class="about-company__title h1">Создай свой БЛОГ сейчас!</p>
+                <p class="about-company__info text-info">Сервис предоставляет место где люди могут создать блоги по своим интересам и найти своих единомышленников!</p>
+                <button class="about-company__create-deal create-deal reset-btn" data-a11y-dialog-show="dialog-window">
+                    <a class="reset-btn" asp-area="" asp-page="/Blogs/Create">Создать Блог</a>
+                </button>
+                <button class="about-company__create-deal create-deal reset-btn" data-a11y-dialog-show="dialog-window">
+                    <a class="reset-btn" asp-area="" asp-page="/Posts/Index">Лента постов</a>
+                </button>
+            </div>
+        </div>
+    </section>
+    <section class="containerr">
+        @foreach (var item in Model.BlogE)
+        {
+            <div class="blockk">
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            </div>
+        }
+        @* <a class="blockk" asp-area="" asp-page="/posti">opisanie</a> *@
+        @* <a class="blockk" asp-area="" asp-page="/vxod">vxod</a> *@
+        @* <a class="blockk" asp-area="" asp-page="/regesrt">regesrt</a> *@
+        @* <a href="page4.html" class="blockk">Блок 4</a> *@
+        @* <a href="page5.html" class="blockk">Блок 5</a> *@
+        @* <a href="page6.html" class="blockk">Блок 6</a> *@
+    </section>
+
+    <section id="about" class="about-service section">
+        <div class="container">
+            <h2 class="about-service__title h2">О сервисе BlogProject</h2>
+            <div class="about-service__content">
+                <div class="advantage-info">
+                    <p class="text-info advantage-color">Низкая стоимость</p>
+                    <p class="text-info advantage-color">100% возврат оплаты</p>
+                    <p class="text-info advantage-color">100% компенсация затрат</p>
+                    <p class="text-info advantage-color">Точность выполнения условий сделки</p>
+                    <p class="text-info advantage-color">Оплата после доставки</p>
+                    <p class="text-info advantage-color">100% возврат товара</p>
+                    <p class="text-info advantage-color">Быстрая доставка</p>
+                </div>
+                <div class="warranty">
+                    <p class="warranty__text warranty-info"><strong class="strong">Сервис BlogProject</strong> выступает гарантом <br> в сделках купли-продажи товаров и является агрегатором доставки</p>
+
+                    <div class="warranty__proof">
+                        <div class="warranty__picture">
+                            <picture>
+                                @* <source srcset="./assets/images/smileface.avif" type="image/avif">
+                                <source srcset="./assets/images/smileface.webp" type="image/webp"> *@
+                                <img class="warranty__img" src="./img/smileface.jpeg" alt="Человек из команды">
+                            </picture>
+                        </div>
+                        <p class="warranty__info">
+                            ВОТ ЧТО С ВАМИ СТАНЕТ, ЕСЛИ ВЫ ВОЗЬМЕТЕ ПРОЕКТ С СОЗДАНИЕМ САЙТА ДЛЯ БЛОГОВ.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works section">
+        <div class="container">
+            <h2 class="how-it-works__title h2">Как это работает?</h2>
+            <div class="how-it-works__content">
+                <div class="selection-block">
+                    <div class="selection-block__img">
+                        <picture>
+                            @* <source srcset="./assets/images/box.avif" type="image/avif"> *@
+                            @* <source srcset="./assets/images/box.webp" type="image/webp"> *@
+                            <img src="./img/box.png" alt="box">
+                        </picture>
+                    </div>
+                    <p class="selection-block__info selection-content">1. Устная договорённость участников</p>
+                </div>
+                <div class="selection-block">
+                    <div class="selection-block__img">
+                        <picture>
+                            @* <source srcset="./assets/images/folder.avif" type="image/avif"> *@
+                            @* <source srcset="./assets/images/folder.webp" type="image/webp"> *@
+                            <img src="./img/folder.png" alt="folder">
+                        </picture>
+                    </div>
+                    <p class="selection-block__info selection-content">2. Заполнение данных продавцов</p>
+                </div>
+                <div class="selection-block">
+                    <div class="selection-block__img">
+                        <picture>
+                            @* <source srcset="./assets/images/folder.avif" type="image/avif"> *@
+                            @* <source srcset="./assets/images/folder.webp" type="image/webp"> *@
+                            <img src="./img/folder.png" alt="folder">
+                        </picture>
+                    </div>
+                    <p class="selection-block__info selection-content">3. Заполнение данных покупателем</p>
+                </div>
+                <div class="selection-block">
+                    <div class="selection-block__img">
+                        <picture>
+                            @* <source srcset="./assets/images/box.avif" type="image/avif"> *@
+                            @* <source srcset="./assets/images/box.webp" type="image/webp"> *@
+                            <img src="./img/box.png" alt="box">
+                        </picture>
+                    </div>
+                    <p class="selection-block__info selection-content">4. Депонирование суммы за товар и услуги</p>
+                </div>
+                <div class="selection-block">
+                    <div class="selection-block__img">
+                        <picture>
+                            @* <source srcset="./assets/images/box.avif" type="image/avif"> *@
+                            @* <source srcset="./assets/images/box.webp" type="image/webp"> *@
+                            <img src="./img/box.png" alt="box">
+                        </picture>
+                    </div>
+                    <p class="selection-block__info selection-content">5. Передача посылки с заказом перевозчику</p>
+                </div>
+                <div class="selection-block">
+                    <div class="selection-block__img">
+                        <picture>
+                            @* <source srcset="./assets/images/box.avif" type="image/avif"> *@
+                            @* <source srcset="./assets/images/box.webp" type="image/webp"> *@
+                            <img src="./img/box.png" alt="box">
+                        </picture>
+                    </div>
+                    <p class="selection-block__info selection-content">6. Доставка груза и проверка получателем</p>
+                </div>
+                <div class="selection-block">
+                    <div class="selection-block__img">
+                        <picture>
+                            @* <source srcset="./assets/images/wallet.avif" type="image/avif"> *@
+                            @* <source srcset="./assets/images/wallet.webp" type="image/webp"> *@
+                            <img src="./img/wallet.png" alt="wallet">
+                        </picture>
+                    </div>
+                    <p class="selection-block__info selection-content">7. Оплата продавцом за услугу доставки</p>
+                </div>
+                <div class="selection-block">
+                    <div class="selection-block__img">
+                        <picture>
+                            @* <source srcset="./assets/images/wallet.avif" type="image/avif"> *@
+                            @* <source srcset="./assets/images/wallet.webp" type="image/webp"> *@
+                            <img src="./img/wallet.png" alt="wallet">
+                        </picture>
+                    </div>
+                    <p class="selection-block__info selection-content">8. Перевод оплаты продавцу, завершение</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="what-selling">
+        <div class="container">
+            <div class="what-selling__content">
+                <article class="sell-info">
+                    <p class="sell-info__info-text mini-title">
+                        Новые и б/у товары на сайтах и досках объявлений
+                    </p>
+                    <p class="sell-info__text">С помощью сервиса вы защищаете себя от недобросовестных покупателей. В случае отказа от товара по инициативе Покупателя, вам вернут товар бесплатно.</p>
+                    <div class="sell-info__img">
+                        <picture>
+                            @* <source srcset="./assets/images/box.avif" type="image/avif"> *@
+                            @* <source srcset="./assets/images/box.webp" type="image/webp"> *@
+                            <img src="./img/box.png" alt="box">
+                        </picture>
+                    </div>
+                </article>
+                <article class="sell-info">
+                    <p class="sell-info__info-text mini-title">
+                        Онлайн продажи в интернет магазинах
+                    </p>
+                    <p class="sell-info__text">Зная про гарантии сервиса Prodeal а и про возможость проверить товар перед оплатой, Ваши покупатели без проблем будут переводить предоплату. Всем выгодно честное сотрудничество.</p>
+                    <div class="sell-info__img">
+                        <picture>
+                            @* <source srcset="./assets/images/paperbag.avif" type="image/avif"> *@
+                            @* <source srcset="./assets/images/paperbag.webp" type="image/webp"> *@
+                            <img src="./img/paperbag.png" alt="paperbag">
+                        </picture>
+                    </div>
+                </article>
+                <article class="sell-info">
+                    <p class="sell-info__info-text mini-title">
+                        Коллекционные предметы
+                    </p>
+                    <p class="sell-info__text">Продаёте дорогие и уникальные товары, которые будут тщательно проверяться покупателем? С сервисом вы можете быть спокойней – перед вашей отправкой товара, покупатель зарезервирует средства для обеспечения сделки.</p>
+                    <div class="sell-info__img">
+                        <picture>
+                            @* <source srcset="./assets/images/cinema.avif" type="image/avif"> *@
+                            @* <source srcset="./assets/images/cinema.webp" type="image/webp"> *@
+                            <img src="./img/cinema.png" alt="cinematic lent">
+                        </picture>
+                    </div>
+                </article>
+                <article class="sell-info">
+                    <p class="sell-info__info-text mini-title">
+                        Юридически значимые документы
+                    </p>
+                    <p class="sell-info__text">Получать оплату за передачу различных документов: отчеты, акты, подлинники, трудовые договоры, гарантийные письма, расписки, доверенности и пр.</p>
+                    <div class="sell-info__img">
+                        <picture>
+                            @* <source srcset="./assets/images/file.avif" type="image/avif"> *@
+                            @* <source srcset="./assets/images/file.webp" type="image/webp"> *@
+                            <img src="./img/file.png" alt="folder">
+                        </picture>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="rewiews">
+        <div class="container">
+            <h2 class="rewiews__title h2">Отзывы наших клиентов</h2>
+            <div class="rewiews__content swiper">
+                <div class="swiper-wrapper">
+                    <article class="rewiew-card swiper-slide">
+                        <div class="rewiew-card__title">
+                            <div class="rewiew-card__avatar">
+                                <picture>
+                                    @* <source srcset="./assets/images/review-1.avif" type="image/avif"> *@
+                                    @* <source srcset="./assets/images/review-1.webp" type="image/webp"> *@
+                                    <img src="./img/review-1.png" alt="avatar">
+                                </picture>
+                            </div>
+                            <div class="rewiew-card__name">
+                                <p class="rewiew-card__info selection-content">Cергей Горячев</p>
+                                <svg width="97" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.225 5.692 7.957 2.02a.629.629 0 0 1 .224-.258.585.585 0 0 1 .638 0 .629.629 0 0 1 .224.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L8.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.665.665 0 0 1-.152-.65.635.635 0 0 1 .185-.29.587.587 0 0 1 .303-.141l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L28.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L48.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.186.289a.664.664 0 0 1-.154.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L68.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.186.289a.664.664 0 0 1-.154.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L88.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Z" fill="#FFD400" stroke="#FFD400" stroke-width=".5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                            </div>
+                        </div>
+                        <p class="rewiew-card__text rewiew-text">Весело!</p>
+                    </article>
+
+                    <article class="rewiew-card swiper-slide">
+                        <div class="rewiew-card__title">
+                            <div class="rewiew-card__avatar">
+                                <picture>
+                                    @* <source srcset="./assets/images/review-2.avif" type="image/avif"> *@
+                                    @* <source srcset="./assets/images/review-2.webp" type="image/webp"> *@
+                                    <img src="./img/review-2.png" alt="avatar">
+                                </picture>
+                            </div>
+                            <div class="rewiew-card__name">
+                                <p class="rewiew-card__info selection-content">Михаил Власенко</p>
+                                <svg width="97" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.225 5.692 7.957 2.02a.629.629 0 0 1 .224-.258.585.585 0 0 1 .638 0 .629.629 0 0 1 .224.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L8.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.665.665 0 0 1-.152-.65.635.635 0 0 1 .185-.29.587.587 0 0 1 .303-.141l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L28.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L48.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.186.289a.664.664 0 0 1-.154.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L68.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.186.289a.664.664 0 0 1-.154.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L88.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Z" fill="#FFD400" stroke="#FFD400" stroke-width=".5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                            </div>
+                        </div>
+                        <p class="rewiew-card__text rewiew-text">Сейчас бы в доту!</p>
+                    </article>
+
+                    <article class="rewiew-card swiper-slide">
+                        <div class="rewiew-card__title">
+                            <div class="rewiew-card__avatar">
+                                <picture>
+                                    @* <source srcset="./assets/images/review-3.avif" type="image/avif"> *@
+                                    @* <source srcset="./assets/images/review-3.webp" type="image/webp"> *@
+                                    <img src="./img/review-3.png" alt="avatar">
+                                </picture>
+                            </div>
+                            <div class="rewiew-card__name">
+                                <p class="rewiew-card__info selection-content">Семен Григорьев</p>
+                                <svg width="97" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.225 5.692 7.957 2.02a.629.629 0 0 1 .224-.258.585.585 0 0 1 .638 0 .629.629 0 0 1 .224.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L8.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.665.665 0 0 1-.152-.65.635.635 0 0 1 .185-.29.587.587 0 0 1 .303-.141l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L28.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L48.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.186.289a.664.664 0 0 1-.154.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L68.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.186.289a.664.664 0 0 1-.154.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L88.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Z" fill="#FFD400" stroke="#FFD400" stroke-width=".5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                            </div>
+                        </div>
+                        <p class="rewiew-card__text rewiew-text"> Рекомендую!</p>
+                    </article>
+
+                    <article class="rewiew-card swiper-slide">
+                        <div class="rewiew-card__title">
+                            <div class="rewiew-card__avatar">
+                                <picture>
+                                    @* <source srcset="./assets/images/review-4.avif" type="image/avif"> *@
+                                    @* <source srcset="./assets/images/review-4.webp" type="image/webp"> *@
+                                    <img src="./img/review-4.png" alt="avatar">
+                                </picture>
+                            </div>
+                            <div class="rewiew-card__name">
+                                <p class="rewiew-card__info selection-content">Богдан Рахматов</p>
+                                <svg width="97" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.225 5.692 7.957 2.02a.629.629 0 0 1 .224-.258.585.585 0 0 1 .638 0 .629.629 0 0 1 .224.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L8.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.665.665 0 0 1-.152-.65.635.635 0 0 1 .185-.29.587.587 0 0 1 .303-.141l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L28.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L48.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.186.289a.664.664 0 0 1-.154.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L68.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.186.289a.664.664 0 0 1-.154.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L88.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Z" fill="#FFD400" stroke="#FFD400" stroke-width=".5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                            </div>
+                        </div>
+                        <p class="rewiew-card__text rewiew-text">Добрый день! Воспользовался сервисом «Prodeal». Всё прошло хорошо! Давно пользуюсь Сдэком и это здорово, что к нему подключился такой полезный сервис. Всё прозрачно и понятно! Можно прописать условие сделки, приложить фото товара. Единственное, комиссию сервиса хотелось бы чуть поменьше. Рекомендую!</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="answer-form">
+        <div class="container">
+            <div class="answer-form__container">
+                <div class="answer-form__another-answer">
+                    <h2 class="answer-form__title h2">Связаться <br> с разработчиками</h2>
+                    <p class="answer-form__text advantages-info">Оставьте заявку и наш консультант ответит на любые вопросы, расскажет про все возможности сервиса</p>
+                </div>
+                <div class="feedback">
+                    <form class="feedback__form">
+                        <div class="feedback__info">
+                            <label for="name" class="visually-hidden">.</label>
+                            <input class="feedback__input" type="text" name="name" id="name" placeholder="Имя" autocomplete="off">
+                        </div>
+                        <div class="feedback__info">
+                            <label for="email" class="visually-hidden">.</label>
+                            <input class="feedback__input" type="text" name="email" id="email" placeholder="Email" autocomplete="off">
+                        </div>
+                        <div class="feedback__info">
+                            <label for="phone" class="visually-hidden">.</label>
+                            <input class="feedback__input" type="text" name="phone" id="phone" placeholder="Телефон" autocomplete="off">
+                        </div>
+                    </form>
+                    <button class="feedback__btn create-deal reset-btn">Оставить заявку</button>
+                    <p class="feedback__confidency confidency"><b>Заполняя форму вы соглашаетесь на обработку персональных данных и получение информационных сообщений от BlogProject</b></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
