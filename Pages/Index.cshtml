@@ -9,6 +9,7 @@
 @using Microsoft.AspNetCore.Authorization;
 
 
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -35,39 +36,73 @@
                     <p class="about-company__info text-info">Сервис предоставляет место где люди могут создать блоги по своим интересам и найти своих единомышленников!</p>
 
                     <button class="about-company__create-deal create-deal reset-btn" data-a11y-dialog-show="dialog-window">
-                        <a class="reset-btn" asp-area="" asp-page="/Blogs/Create">Создать Блог</a>
+                        <a class="reset-btn btn-link" asp-area="" asp-page="/Blogs/Create">Создать Блог</a>
                     </button>
                     <button class="about-company__create-deal create-deal reset-btn" data-a11y-dialog-show="dialog-window">
-                        <a class="reset-btn" asp-area="" asp-page="/Posts/Index">Лента постов</a>
+                        <a class="reset-btn btn-link" asp-area="" asp-page="/Posts/Index">Лента постов</a>
                     </button>
                 </div>
             </div>
         </section>
 
-        <section>
+        <section class="roleform">
+            
+
             <form id="addRoleForm" method="post">
-                <input type="text" name="roleName" placeholder="Введите имя роли" value="STALIN" required />
-                <button type="submit">Добавить роль</button>
+                <div class="roleform__info">
+                    <label for="roleName" class="visually-hidden">.</label>
+                    <input class="roleform__input" type="text" name="roleName" id="rolename" placeholder="Введите имя роли" required autocomplete="off">
+                </div>
+                @{
+                    ViewData["Title"] = "Добавить роль";
+                }
+
+                <h2>Добавить роль</h2>
+
+                <form asp-action="AddRoleToUser " method="post">
+                    <div class="form-group">
+                        <label for="roleName">Имя роли</label>
+                        <input type="text" class="form-control" id="roleName" name="roleName" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить роль</button>
+                </form>
             </form>
     </section>
 
-    <section class="containerr">
-        @foreach (var item in Model.BlogE)
-        {
-            <div class="blockk">
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
-            </div>
-        }
-    </section>
+        <section class="containerr">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model?.BlogE != null && Model.BlogE.Any())
+                    {
+                        foreach (var item in Model.BlogE)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    <a asp-page="./Edit" asp-route-id="@item.Id" class="reset-link">Редактировать</a>
+                                    <a asp-page="./Details" asp-route-id="@item.Id" class="reset-link">Детали</a>
+                                    <a asp-page="./Delete" asp-route-id="@item.Id" class="reset-link">Удалить</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="2">Нет доступных блогов.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </section>
 
 
 
@@ -77,13 +112,10 @@
             <h2 class="about-service__title h2">О сервисе BlogProject</h2>
             <div class="about-service__content">
                 <div class="advantage-info">
+                    <p class="text-info advantage-color">Удобный интерфейс</p>
+                    <p class="text-info advantage-color">Взаимодействие с другими людьми</p>
+                    <p class="text-info advantage-color">Связь с поддержкой 24/7</p>
                     <p class="text-info advantage-color">Низкая стоимость</p>
-                    <p class="text-info advantage-color">100% возврат оплаты</p>
-                    <p class="text-info advantage-color">100% компенсация затрат</p>
-                    <p class="text-info advantage-color">Точность выполнения условий сделки</p>
-                    <p class="text-info advantage-color">Оплата после доставки</p>
-                    <p class="text-info advantage-color">100% возврат товара</p>
-                    <p class="text-info advantage-color">Быстрая доставка</p>
                 </div>
                 <div class="warranty">
                     <p class="warranty__text warranty-info"><strong class="strong">Сервис BlogProject</strong> выступает гарантом <br> в сделках купли-продажи товаров и является агрегатором доставки</p>
@@ -91,8 +123,8 @@
                     <div class="warranty__proof">
                         <div class="warranty__picture">
                             <picture>
-                                @* <source srcset="./assets/images/smileface.avif" type="image/avif">
-                                <source srcset="./assets/images/smileface.webp" type="image/webp"> *@
+                                    @* <source srcset="./assets/images/smileface.avif" type="image/avif">
+                                <source srcset="./assets/images/smileface.webp" type="image/webp">*@
                                 <img class="warranty__img" src="./img/smileface.jpeg" alt="Человек из команды">
                             </picture>
                         </div>
@@ -112,9 +144,9 @@
                 <div class="selection-block">
                     <div class="selection-block__img">
                         <picture>
-                            @* <source srcset="./assets/images/box.avif" type="image/avif"> *@
-                            @* <source srcset="./assets/images/box.webp" type="image/webp"> *@
-                            <img src="./img/box.png" alt="box">
+                                @* <source srcset="./assets/images/box.avif" type="image/avif"> 
+                            <source srcset="./assets/images/box.webp" type="image/webp"> *@
+                                <img class="selection-block__img"  src="./img/box.png" alt="box">
                         </picture>
                     </div>
                     <p class="selection-block__info selection-content">1. Устная договорённость участников</p>
@@ -124,7 +156,7 @@
                         <picture>
                             @* <source srcset="./assets/images/folder.avif" type="image/avif"> *@
                             @* <source srcset="./assets/images/folder.webp" type="image/webp"> *@
-                            <img src="./img/folder.png" alt="folder">
+                                <img class="selection-block__img"  src="./img/folder.png" alt="folder">
                         </picture>
                     </div>
                     <p class="selection-block__info selection-content">2. Заполнение данных продавцов</p>
@@ -134,7 +166,7 @@
                         <picture>
                             @* <source srcset="./assets/images/folder.avif" type="image/avif"> *@
                             @* <source srcset="./assets/images/folder.webp" type="image/webp"> *@
-                            <img src="./img/folder.png" alt="folder">
+                                <img class="selection-block__img"  src="./img/folder.png" alt="folder">
                         </picture>
                     </div>
                     <p class="selection-block__info selection-content">3. Заполнение данных покупателем</p>
@@ -142,9 +174,9 @@
                 <div class="selection-block">
                     <div class="selection-block__img">
                         <picture>
-                            @* <source srcset="./assets/images/box.avif" type="image/avif"> *@
-                            @* <source srcset="./assets/images/box.webp" type="image/webp"> *@
-                            <img src="./img/box.png" alt="box">
+                                @* <source srcset="./assets/images/folder.avif" type="image/avif"> *@
+                                @* <source srcset="./assets/images/folder.webp" type="image/webp"> *@
+                                <img class="selection-block__img" src="./img/folder.png" alt="folder">
                         </picture>
                     </div>
                     <p class="selection-block__info selection-content">4. Депонирование суммы за товар и услуги</p>
@@ -154,7 +186,7 @@
                         <picture>
                             @* <source srcset="./assets/images/box.avif" type="image/avif"> *@
                             @* <source srcset="./assets/images/box.webp" type="image/webp"> *@
-                            <img src="./img/box.png" alt="box">
+                                <img class="selection-block__img"  src="./img/box.png" alt="box">
                         </picture>
                     </div>
                     <p class="selection-block__info selection-content">5. Передача посылки с заказом перевозчику</p>
@@ -164,7 +196,7 @@
                         <picture>
                             @* <source srcset="./assets/images/box.avif" type="image/avif"> *@
                             @* <source srcset="./assets/images/box.webp" type="image/webp"> *@
-                            <img src="./img/box.png" alt="box">
+                                <img class="selection-block__img"  src="./img/box.png" alt="box">
                         </picture>
                     </div>
                     <p class="selection-block__info selection-content">6. Доставка груза и проверка получателем</p>
@@ -174,7 +206,7 @@
                         <picture>
                             @* <source srcset="./assets/images/wallet.avif" type="image/avif"> *@
                             @* <source srcset="./assets/images/wallet.webp" type="image/webp"> *@
-                            <img src="./img/wallet.png" alt="wallet">
+                                <img class="selection-block__img"  src="./img/wallet.png" alt="wallet">
                         </picture>
                     </div>
                     <p class="selection-block__info selection-content">7. Оплата продавцом за услугу доставки</p>
@@ -184,7 +216,7 @@
                         <picture>
                             @* <source srcset="./assets/images/wallet.avif" type="image/avif"> *@
                             @* <source srcset="./assets/images/wallet.webp" type="image/webp"> *@
-                            <img src="./img/wallet.png" alt="wallet">
+                                <img class="selection-block__img"  src="./img/wallet.png" alt="wallet">
                         </picture>
                     </div>
                     <p class="selection-block__info selection-content">8. Перевод оплаты продавцу, завершение</p>
@@ -205,7 +237,7 @@
                         <picture>
                             @* <source srcset="./assets/images/box.avif" type="image/avif"> *@
                             @* <source srcset="./assets/images/box.webp" type="image/webp"> *@
-                            <img src="./img/box.png" alt="box">
+                                <img class="sell-info__img" src="./img/box.png" alt="box">
                         </picture>
                     </div>
                 </article>
@@ -213,12 +245,12 @@
                     <p class="sell-info__info-text mini-title">
                         Онлайн продажи в интернет магазинах
                     </p>
-                    <p class="sell-info__text">Зная про гарантии сервиса Prodeal а и про возможость проверить товар перед оплатой, Ваши покупатели без проблем будут переводить предоплату. Всем выгодно честное сотрудничество.</p>
+                    <p class="sell-info__text">.</p>
                     <div class="sell-info__img">
                         <picture>
                             @* <source srcset="./assets/images/paperbag.avif" type="image/avif"> *@
                             @* <source srcset="./assets/images/paperbag.webp" type="image/webp"> *@
-                            <img src="./img/paperbag.png" alt="paperbag">
+                                <img class="sell-info__img" src="./img/paperbag.png" alt="paperbag">
                         </picture>
                     </div>
                 </article>
@@ -231,7 +263,7 @@
                         <picture>
                             @* <source srcset="./assets/images/cinema.avif" type="image/avif"> *@
                             @* <source srcset="./assets/images/cinema.webp" type="image/webp"> *@
-                            <img src="./img/cinema.png" alt="cinematic lent">
+                                <img class="sell-info__img" src="./img/wallet.png" alt="cinematic lent">
                         </picture>
                     </div>
                 </article>
@@ -244,7 +276,7 @@
                         <picture>
                             @* <source srcset="./assets/images/file.avif" type="image/avif"> *@
                             @* <source srcset="./assets/images/file.webp" type="image/webp"> *@
-                            <img src="./img/file.png" alt="folder">
+                                <img class="sell-info__img" src="./img/folder.png" alt="folder">
                         </picture>
                     </div>
                 </article>
@@ -254,8 +286,8 @@
 
     <section class="rewiews">
         <div class="container">
-            <h2 class="rewiews__title h2">Отзывы наших клиентов</h2>
-            <div class="rewiews__content swiper">
+            <h2 class="rewiews__title h2">НАШИ РАЗРАБОТЧИКИ</h2>
+            <div class=" swiper">
                 <div class="swiper-wrapper">
                     <article class="rewiew-card swiper-slide">
                         <div class="rewiew-card__title">
@@ -322,8 +354,42 @@
                                 <svg width="97" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.225 5.692 7.957 2.02a.629.629 0 0 1 .224-.258.585.585 0 0 1 .638 0 .629.629 0 0 1 .224.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L8.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.665.665 0 0 1-.152-.65.635.635 0 0 1 .185-.29.587.587 0 0 1 .303-.141l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L28.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L48.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.186.289a.664.664 0 0 1-.154.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L68.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.186.289a.664.664 0 0 1-.154.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L88.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Z" fill="#FFD400" stroke="#FFD400" stroke-width=".5" stroke-linecap="round" stroke-linejoin="round" /></svg>
                             </div>
                         </div>
-                        <p class="rewiew-card__text rewiew-text">Добрый день! Воспользовался сервисом «Prodeal». Всё прошло хорошо! Давно пользуюсь Сдэком и это здорово, что к нему подключился такой полезный сервис. Всё прозрачно и понятно! Можно прописать условие сделки, приложить фото товара. Единственное, комиссию сервиса хотелось бы чуть поменьше. Рекомендую!</p>
+                        <p class="rewiew-card__text rewiew-text">ПАМАГИТЕ!</p>
                     </article>
+
+                        <article class="rewiew-card swiper-slide">
+                            <div class="rewiew-card__title">
+                                <div class="rewiew-card__avatar">
+                                    <picture>
+                                        @* <source srcset="./assets/images/review-4.avif" type="image/avif"> *@
+                                        @* <source srcset="./assets/images/review-4.webp" type="image/webp"> *@
+                                        <img class="rewiew-card__avatar" src="./img/review-5.png" alt="avatar">
+                                    </picture>
+                                </div>
+                                <div class="rewiew-card__name">
+                                    <p class="rewiew-card__info selection-content">Семен Карпов</p>
+                                    <svg width="97" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.225 5.692 7.957 2.02a.629.629 0 0 1 .224-.258.585.585 0 0 1 .638 0 .629.629 0 0 1 .224.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L8.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.665.665 0 0 1-.152-.65.635.635 0 0 1 .185-.29.587.587 0 0 1 .303-.141l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L28.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L48.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.186.289a.664.664 0 0 1-.154.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L68.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.186.289a.664.664 0 0 1-.154.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L88.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Z" fill="#FFD400" stroke="#FFD400" stroke-width=".5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                                </div>
+                            </div>
+                            <p class="rewiew-card__text rewiew-text">Каеф</p>
+                        </article>
+
+                        <article class="rewiew-card swiper-slide">
+                            <div class="rewiew-card__title">
+                                <div class="rewiew-card__avatar">
+                                    <picture>
+                                        @* <source srcset="./assets/images/review-4.avif" type="image/avif"> *@
+                                        @* <source srcset="./assets/images/review-4.webp" type="image/webp"> *@
+                                        <img class="rewiew-card__avatar" src="./img/review-6.png" alt="avatar">
+                                    </picture>
+                                </div>
+                                <div class="rewiew-card__name">
+                                    <p class="rewiew-card__info selection-content">Вечеслав Зинин</p>
+                                    <svg width="97" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.225 5.692 7.957 2.02a.629.629 0 0 1 .224-.258.585.585 0 0 1 .638 0 .629.629 0 0 1 .224.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L8.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.665.665 0 0 1-.152-.65.635.635 0 0 1 .185-.29.587.587 0 0 1 .303-.141l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L28.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L48.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.186.289a.664.664 0 0 1-.154.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L68.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.186.289a.664.664 0 0 1-.154.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L88.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Z" fill="#FFD400" stroke="#FFD400" stroke-width=".5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                                </div>
+                            </div>
+                            <p class="rewiew-card__text rewiew-text">Интересно</p>
+                        </article>
                 </div>
             </div>
         </div>
@@ -351,7 +417,11 @@
                             <input class="feedback__input" type="text" name="phone" id="phone" placeholder="Телефон" autocomplete="off">
                         </div>
                     </form>
-                    <button class="feedback__btn create-deal reset-btn">Оставить заявку</button>
+                       <a href="https://e.mail.ru/compose/" class="button" target="_blank">
+                        <button class="feedback__btn create-deal reset-btn">
+                            Оставить заявку
+                        </button>
+                       </a>
                     <p class="feedback__confidency confidency"><b>Заполняя форму вы соглашаетесь на обработку персональных данных и получение информационных сообщений от BlogProject</b></p>
                 </div>
             </div>
@@ -361,7 +431,8 @@
 }
 else{
     <p>ПРОСМОТР САЙТА БЕЗ ДОНАТА ЗАПРЕЩЕН, ЧТОБЫ СОЗДАТЬ АККАУНТ, ПРОДАЙТЕ ДУШУ. СДЕЛАТЬ ЭТО МОЖНО ПО QR коду</p>
-    <img src="/img/photo_2024-12-18_00-29-43.jpg">
+
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><img class="qrc" src="/img/photo_2024-12-18_00-29-43.jpg"></a>
 }
 </html>
 
