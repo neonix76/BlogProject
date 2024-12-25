@@ -3,9 +3,10 @@
 @{
     ViewData["Title"] = "Home page";
 }
+@using BlogProject.Data.Entities
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 @using Microsoft.AspNetCore.Authorization;
 
 
@@ -41,68 +42,59 @@
                     <button class="about-company__create-deal create-deal reset-btn" data-a11y-dialog-show="dialog-window">
                         <a class="reset-btn btn-link" asp-area="" asp-page="/Posts/Index">Лента постов</a>
                     </button>
+                    <button class="about-company__create-deal create-deal reset-btn" data-a11y-dialog-show="dialog-window">
+                        <a class="reset-btn btn-link" asp-area="" asp-page="/Comments/Index">Комментарии</a>
+                    </button>
                 </div>
             </div>
         </section>
 
-        <section class="roleform">
-            
+        @* <section class="roleform"> *@
 
-            <form id="addRoleForm" method="post">
-                <div class="roleform__info">
-                    <label for="roleName" class="visually-hidden">.</label>
-                    <input class="roleform__input" type="text" name="roleName" id="rolename" placeholder="Введите имя роли" required autocomplete="off">
-                </div>
-                @{
-                    ViewData["Title"] = "Добавить роль";
-                }
 
-                <h2>Добавить роль</h2>
+        @*     <h2>Добавить роль к пользователю</h2> *@
+        @*     <a class="reset-btn btn-link" asp-area="" asp-page="/AddRole">Лента постов</a> *@
+        @*      <form method="post" action="">  *@
+        @*        <input type="text" name="RoleName" />  *@
+        @*          <button type="submit" asp-page-handler="AddRole">asdasd</button>  *@
+        @*      </form>  *@
+        @* </section> *@
 
-                <form asp-action="AddRoleToUser " method="post">
-                    <div class="form-group">
-                        <label for="roleName">Имя роли</label>
-                        <input type="text" class="form-control" id="roleName" name="roleName" required />
-                    </div>
-                    <button type="submit" class="btn btn-primary">Добавить роль</button>
-                </form>
-            </form>
-    </section>
-
-        <section class="containerr">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Название</th>
-                        <th>Действия</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model?.BlogE != null && Model.BlogE.Any())
-                    {
-                        foreach (var item in Model.BlogE)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    <a asp-page="./Edit" asp-route-id="@item.Id" class="reset-link">Редактировать</a>
-                                    <a asp-page="./Details" asp-route-id="@item.Id" class="reset-link">Детали</a>
-                                    <a asp-page="./Delete" asp-route-id="@item.Id" class="reset-link">Удалить</a>
-                                </td>
-                            </tr>
-                        }
-                    }
-                    else
-                    {
-                        <tr>
-                            <td colspan="2">Нет доступных блогов.</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </section>
+        @* <section class="containerr"> *@
+        @*     <table> *@
+        @*         <thead> *@
+        @*             <tr> *@
+        @*                 <th>Название</th> *@
+        @*                 <th>Действия</th> *@
+        @*             </tr> *@
+        @*         </thead> *@
+        @*         <tbody> *@
+        @*             @if (Model?.BlogE != null && Model.BlogE.Any()) *@
+        @*             { *@
+                        
+        @*                 foreach (var item in Model.BlogE) *@
+        @*                 { *@
+        @*                     <tr> *@
+        @*                         <td> *@
+        @*                             @Html.DisplayFor(modelItem => item.Name) *@
+        @*                         </td> *@
+        @*                         <td>  *@
+        @*                             <a asp-page="/Blogs/Edit" asp-route-id="@item.Id" class="reset-link">Редактировать</a>  *@
+        @*                             <a asp-page="/Blogs/Details" asp-route-id="@item.Id" class="reset-link">Детали</a>  *@
+        @*                             <a asp-page="/Blogs/Delete" asp-route-id="@item.Id" class="reset-link">Удалить</a>  *@
+        @*                          </td> *@
+        @*                     </tr> *@
+        @*                 } *@
+        @*             } *@
+        @*             else *@
+        @*             { *@
+        @*                 <tr> *@
+        @*                     <td colspan="2">Нет доступных блогов.</td> *@
+        @*                 </tr> *@
+        @*             } *@
+        @*         </tbody> *@
+        @*     </table> *@
+        @* </section> *@
 
 
 
@@ -118,12 +110,12 @@
                     <p class="text-info advantage-color">Низкая стоимость</p>
                 </div>
                 <div class="warranty">
-                    <p class="warranty__text warranty-info"><strong class="strong">Сервис BlogProject</strong> выступает гарантом <br> в сделках купли-продажи товаров и является агрегатором доставки</p>
+                    <p class="warranty__text warranty-info"><strong class="strong">Сервис BlogProject</strong> предлагает вам <br> инновационный взгляд на дизайн </p>
 
                     <div class="warranty__proof">
                         <div class="warranty__picture">
                             <picture>
-                                    @* <source srcset="./assets/images/smileface.avif" type="image/avif">
+                                @* <source srcset="./assets/images/smileface.avif" type="image/avif">
                                 <source srcset="./assets/images/smileface.webp" type="image/webp">*@
                                 <img class="warranty__img" src="./img/smileface.jpeg" alt="Человек из команды">
                             </picture>
@@ -139,7 +131,7 @@
 
     <section class="how-it-works section">
         <div class="container">
-            <h2 class="how-it-works__title h2">Как это работает?</h2>
+            <h2 class="how-it-works__title h2">Преимущества перед другими сайтами</h2>
             <div class="how-it-works__content">
                 <div class="selection-block">
                     <div class="selection-block__img">
@@ -149,7 +141,7 @@
                                 <img class="selection-block__img"  src="./img/box.png" alt="box">
                         </picture>
                     </div>
-                    <p class="selection-block__info selection-content">1. Устная договорённость участников</p>
+                    <p class="selection-block__info selection-content">1. Наилучшая команда разработчиков</p>
                 </div>
                 <div class="selection-block">
                     <div class="selection-block__img">
@@ -159,7 +151,7 @@
                                 <img class="selection-block__img"  src="./img/folder.png" alt="folder">
                         </picture>
                     </div>
-                    <p class="selection-block__info selection-content">2. Заполнение данных продавцов</p>
+                    <p class="selection-block__info selection-content">2. Частые нововведения</p>
                 </div>
                 <div class="selection-block">
                     <div class="selection-block__img">
@@ -169,7 +161,7 @@
                                 <img class="selection-block__img"  src="./img/folder.png" alt="folder">
                         </picture>
                     </div>
-                    <p class="selection-block__info selection-content">3. Заполнение данных покупателем</p>
+                    <p class="selection-block__info selection-content">3. Артемий Лебедев - дизайнер</p>
                 </div>
                 <div class="selection-block">
                     <div class="selection-block__img">
@@ -179,7 +171,17 @@
                                 <img class="selection-block__img" src="./img/folder.png" alt="folder">
                         </picture>
                     </div>
-                    <p class="selection-block__info selection-content">4. Депонирование суммы за товар и услуги</p>
+                    <p class="selection-block__info selection-content">4. Сайт с открытым кодом</p>
+                </div>
+                <div class="selection-block">
+                    <div class="selection-block__img">
+                        <picture>
+                            @* <source srcset="./assets/images/box.avif" type="image/avif"> *@
+                            @* <source srcset="./assets/images/box.webp" type="image/webp"> *@
+                            <img class="selection-block__img"  src="./img/box.png" alt="box">
+                        </picture>
+                    </div>
+                    <p class="selection-block__info selection-content">5. Возможность обсудить блог или пост</p>
                 </div>
                 <div class="selection-block">
                     <div class="selection-block__img">
@@ -189,17 +191,7 @@
                                 <img class="selection-block__img"  src="./img/box.png" alt="box">
                         </picture>
                     </div>
-                    <p class="selection-block__info selection-content">5. Передача посылки с заказом перевозчику</p>
-                </div>
-                <div class="selection-block">
-                    <div class="selection-block__img">
-                        <picture>
-                            @* <source srcset="./assets/images/box.avif" type="image/avif"> *@
-                            @* <source srcset="./assets/images/box.webp" type="image/webp"> *@
-                                <img class="selection-block__img"  src="./img/box.png" alt="box">
-                        </picture>
-                    </div>
-                    <p class="selection-block__info selection-content">6. Доставка груза и проверка получателем</p>
+                    <p class="selection-block__info selection-content">6. Частые конкурсы</p>
                 </div>
                 <div class="selection-block">
                     <div class="selection-block__img">
@@ -209,7 +201,7 @@
                                 <img class="selection-block__img"  src="./img/wallet.png" alt="wallet">
                         </picture>
                     </div>
-                    <p class="selection-block__info selection-content">7. Оплата продавцом за услугу доставки</p>
+                    <p class="selection-block__info selection-content">7. Бесплатная реклама ваших услуг или товаров</p>
                 </div>
                 <div class="selection-block">
                     <div class="selection-block__img">
@@ -219,13 +211,13 @@
                                 <img class="selection-block__img"  src="./img/wallet.png" alt="wallet">
                         </picture>
                     </div>
-                    <p class="selection-block__info selection-content">8. Перевод оплаты продавцу, завершение</p>
+                    <p class="selection-block__info selection-content">8. Встроенный СБП для оплаты</p>
                 </div>
             </div>
         </div>
-    </section>
+        </section>
 
-    <section class="what-selling">
+    <section hidden class="what-selling">
         <div class="container">
             <div class="what-selling__content">
                 <article class="sell-info">
@@ -384,7 +376,7 @@
                                     </picture>
                                 </div>
                                 <div class="rewiew-card__name">
-                                    <p class="rewiew-card__info selection-content">Вечеслав Зинин</p>
+                                    <p class="rewiew-card__info selection-content">Вячеслав Зинин</p>
                                     <svg width="97" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.225 5.692 7.957 2.02a.629.629 0 0 1 .224-.258.585.585 0 0 1 .638 0 .629.629 0 0 1 .224.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L8.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.665.665 0 0 1-.152-.65.635.635 0 0 1 .185-.29.587.587 0 0 1 .303-.141l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L28.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.185.289a.664.664 0 0 1-.153.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L48.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.186.289a.664.664 0 0 1-.154.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L68.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Zm20 0 1.732-3.672a.63.63 0 0 1 .224-.258.585.585 0 0 1 .639 0 .628.628 0 0 1 .223.258l1.732 3.672 3.872.592a.588.588 0 0 1 .304.142c.086.076.15.176.186.289a.664.664 0 0 1-.154.651l-2.802 2.857.662 4.035c.084.518-.436.912-.88.668L88.5 13.02l-3.463 1.906c-.444.245-.964-.15-.88-.67l.662-4.034-2.802-2.856a.642.642 0 0 1-.164-.303.666.666 0 0 1 .012-.348.636.636 0 0 1 .185-.288.588.588 0 0 1 .303-.142l3.872-.593Z" fill="#FFD400" stroke="#FFD400" stroke-width=".5" stroke-linecap="round" stroke-linejoin="round" /></svg>
                                 </div>
                             </div>

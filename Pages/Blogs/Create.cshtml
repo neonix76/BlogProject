@@ -6,28 +6,27 @@
             Layout = "~/Pages/Shared/_Layout.cshtml";
         }
         
-        <h1>Create</h1>
-        
-    <h4>BlogE</h4>
-    <hr />
-    <div class="row">
+<h1>Создание блогов</h1>
+
+<hr class="simple-hr">
+<div class="row">
     <div class="col-md-4">
-    <form method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="BlogE.Name" class="control-label"></label>
-                <input asp-for="BlogE.Name" class="form-control" />
+        <form method="post" class="manager-column">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group manager-row d-flex align-items-center">
+                <input asp-for="BlogE.Name" class="form-control" placeholder="Введите название блога" />
+                <label asp-for="BlogE.Name" class="control-label ms-2"></label>
                 <span asp-validation-for="BlogE.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Создать" class="btn btn-primary" />
+            </div>
+            <div class="text-center">
+                <a asp-page="Index" class="link">Список блогов</a>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {

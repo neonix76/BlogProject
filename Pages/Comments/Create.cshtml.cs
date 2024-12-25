@@ -7,14 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using BlogProject.Data;
 using BlogProject.Data.Entities;
-using Microsoft.AspNetCore.Authorization;
 
-namespace BlogProject.Pages.Posts
+namespace BlogProject.Pages.Comments
 {
-    [Authorize(Roles = "STALIN")]
     public class CreateModel : PageModel
     {
-        
         private readonly BlogProject.Data.ApplicationDbContext _context;
 
         public CreateModel(BlogProject.Data.ApplicationDbContext context)
@@ -24,12 +21,11 @@ namespace BlogProject.Pages.Posts
 
         public IActionResult OnGet()
         {
-        ViewData["BlogEId"] = new SelectList(_context.Blogs, "Id", "Id");
             return Page();
         }
 
         [BindProperty]
-        public PostE PostE { get; set; } = default!;
+        public CommentaryE CommentaryE { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
@@ -39,7 +35,7 @@ namespace BlogProject.Pages.Posts
                 return Page();
             }
 
-            _context.Posts.Add(PostE);
+            _context.Comments.Add(CommentaryE);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

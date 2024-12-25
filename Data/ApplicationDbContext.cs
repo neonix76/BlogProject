@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlogProject.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -19,10 +19,12 @@ namespace BlogProject.Data
                 .HasForeignKey(p => p.BlogEId);
 
 
+
             base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<PostE> Posts { get; set; }
         public DbSet<BlogE> Blogs { get; set; }
+        public DbSet<CommentaryE> Comments { get; set; }
     }
 }

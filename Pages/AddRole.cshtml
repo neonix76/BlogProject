@@ -1,0 +1,26 @@
+﻿@page
+@model BlogProject.Pages.AddRoleModel
+@{
+    ViewData["Title"] = "Добавить роль";
+}
+
+<h2>Добавить роль пользователю</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="RoleName"></label>
+        <input asp-for="RoleName" class="form-control" required />
+        <span asp-validation-for="RoleName" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Добавить роль</button>
+</form>
+
+<div>
+    <a asp-page="/Index">Назад</a> <!-- Замените на нужную страницу -->
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

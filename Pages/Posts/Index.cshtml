@@ -16,15 +16,19 @@
     <thead>
         <tr>
             <th>
+                НАЗВАНИЕ
                 @Html.DisplayNameFor(model => model.PostE[0].Name)
             </th>
             <th>
+                ОПИСАНИЕ
                 @Html.DisplayNameFor(model => model.PostE[0].Description)
             </th>
             <th>
+                ТЕКСТ
                 @Html.DisplayNameFor(model => model.PostE[0].Text)
             </th>
             <th>
+                КАТЕГОРИЯ
                 @Html.DisplayNameFor(model => model.PostE[0].BlogE)
             </th>
             <th></th>
@@ -43,7 +47,7 @@
                 @Html.DisplayFor(modelItem => item.Text)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BlogE.Id)
+                @Html.DisplayFor(modelItem => item.BlogE.Name)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

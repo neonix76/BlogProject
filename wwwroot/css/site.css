@@ -842,7 +842,7 @@ body {
     background-color: red;
 }
 
-..blockk {
+.blockk {
     width: 100%; /* ???????? ??? ?????? ????????????? ???????? */
     overflow: hidden; /* ???????? ???????????? */
 }
@@ -1028,14 +1028,6 @@ td {
 
 
 
-
-
-
-
-
-
-????????
-
 .nav-pills {
     text-decoration: none;
     color: var(--second-color);
@@ -1074,10 +1066,6 @@ td {
     align-items: center;
 }
 
-
-
-
-???????? ??????
 
 .text-low {
     white-space: nowrap;
@@ -1123,7 +1111,96 @@ td {
 }
 
 .tbody {
-    box-shadow;
-    0.5px;
+    box-shadow: 0.5px;
     background-color: red;
+}
+
+.simple-hr {
+    background: var(--third-color);
+    height: 2px;
+}
+.form-group {
+    display: flex; /* Используем flexbox для выравнивания */
+    align-items: center; /* Центрируем элементы по вертикали */
+    margin-bottom: 15px; /* Отступ между группами */
+}
+
+.form-floating {
+    flex: 1; /* Поле ввода занимает оставшееся пространство */
+    position: relative; /* Позиционирование для плавающих меток */
+}
+
+.form-control {
+    height: 40px; /* Высота полей ввода */
+    border: 1px solid #ced4da; /* Цвет границы */
+    border-radius: 5px; /* Закругленные углы для полей ввода */
+    transition: border-color 0.2s; /* Плавный переход цвета границы */
+}
+
+    .form-control:focus {
+        border-color: #007bff; /* Цвет границы при фокусе */
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Тень при фокусе */
+    }
+
+label {
+    color: #6c757d; /* Цвет меток */
+    margin-left: 10px; /* Отступ слева для меток */
+}
+
+.btn-primary {
+    width: 140px; /* Занимаем всю ширину контейнера */
+    background-color: var(--second-color); /* Цвет кнопки */
+    border: none; /* Убираем границу */
+    border-radius: 40px; /* Закругленные углы для кнопки */
+    padding: 10px; /* Отступы внутри кнопки */
+    font-size: 16px; /* Размер шрифта кнопки */
+    text-decoration: underline;
+    text-decoration: none;
+}
+
+    .btn-primary:hover {
+        background-color: var(--mid-color); /* Цвет кнопки при наведении */
+    }
+
+.text-danger {
+    font-size: 0.875rem; /* Размер шрифта для сообщений об ошибках */
+}
+
+.form-container {
+    
+    padding: 20px; /* Отступы внутри контейнера */
+    border-radius: 8px; /* Закругленные углы */
+    
+}
+
+.control-label {
+    margin-bottom: 5px; /* Отступ снизу для меток */
+    font-weight: bold; /* Жирный шрифт для меток */
+}
+
+.text-center {
+    margin-right: 1200px;
+}
+
+.btn-primary2 {
+    width: 120px; /* Занимаем всю ширину контейнера */
+    background-color: var(--second-color); /* Цвет кнопки */
+    border: none; /* Убираем границу */
+    border-radius: 40px; /* Закругленные углы для кнопки */
+    padding: 10px; /* Отступы внутри кнопки */
+    font-size: 16px; /* Размер шрифта кнопки */
+    text-decoration: underline;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-primarydec {
+    text-decoration: underline;
+    text-decoration: none;
+    color: black;
+    
+}
+
+.btn-primary2:hover {
+    background-color: var(--mid-color);
 }

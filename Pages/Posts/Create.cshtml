@@ -5,43 +5,53 @@
         ViewData["Title"] = "Create";
             Layout = "~/Pages/Shared/_Layout.cshtml";
         }
-        
-        <h1>Create</h1>
-        
-    <h4>PostE</h4>
-    <hr />
-    <div class="row">
-    <div class="col-md-4">
-    <form method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="PostE.Name" class="control-label"></label>
-                <input asp-for="PostE.Name" class="form-control" />
+
+<h1>Create</h1>
+
+
+<hr class="simple-hr" />
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <!-- Центрируем форму на странице -->
+        <form method="post" class="form-container">
+            <h2 class="text-center">Создать пост</h2>
+            <hr class="simple-hr" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3 d-flex align-items-center">
+                <input asp-for="PostE.Name" class="form-control me-2" placeholder="Введите название поста" />
+                <label asp-for="PostE.Name" class="control-label">Название</label>
                 <span asp-validation-for="PostE.Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="PostE.Description" class="control-label"></label>
-                <input asp-for="PostE.Description" class="form-control" />
+
+            <div class="form-group mb-3 d-flex align-items-center">
+                <input asp-for="PostE.Description" class="form-control me-2" placeholder="Введите описание поста" />
+                <label asp-for="PostE.Description" class="control-label">Описание</label>
                 <span asp-validation-for="PostE.Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="PostE.Text" class="control-label"></label>
-                <input asp-for="PostE.Text" class="form-control" />
+
+            <div class="form-group mb-3 d-flex align-items-center">
+                <input asp-for="PostE.Text" class="form-control me-2" placeholder="Введите текст поста" />
+                <label asp-for="PostE.Text" class="control-label">Текст поста</label>
                 <span asp-validation-for="PostE.Text" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="PostE.BlogEId" class="control-label"></label>
-                <select asp-for="PostE.BlogEId" class ="form-control" asp-items="ViewBag.BlogEId"></select>
+
+            <div class="form-group mb-3 d-flex align-items-center">
+                <select asp-for="PostE.BlogEId" class="form-control me-2" asp-items="ViewBag.BlogEId">
+                    <option value="">-- Выберите блог --</option>
+                </select>
+                <label asp-for="PostE.BlogEId" class="control-label">Выберите блог</label>
             </div>
+
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Создать" class="btn btn-primary w-100" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
+<div class="btn-primary2">
+    <a class="btn-primarydec" asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {
